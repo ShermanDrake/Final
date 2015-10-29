@@ -3,10 +3,15 @@ var ballotModel = require('../models/votes.js');
 module.exports = {
 
 	createBallot : function(req, res){
-		var ballot = new ballotModel(req.body)
-		console.log(req.body)
-		
+		var ballot = new ballotModel.Ballot(req.body)
+		// console.log(req.body)
+		// console.log(ballot)
 		ballot.save(function(err, doc) {
+			if(err) {
+
+				console.log(err)
+			}
+
 			res.send(doc)
 
 		})
@@ -14,6 +19,7 @@ module.exports = {
 
 	getBallots : function(req, res){
 		res.send(ballotModel.allBallots)
+
 	}
 
 }
@@ -24,10 +30,13 @@ var createBallot = function(req, res){
 
 		name	: req.body.name,
 		entries	: req.body.entries.split(', '),
+		email	: req.body.email, 
 	})
 
 	newBallot.save( function(err, doc){
 		res.send(doc)
+
+		// Here is where you would want to send the email
 	})
 }
 var findBallots = function(req, res) {

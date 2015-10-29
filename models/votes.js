@@ -14,12 +14,13 @@
 // }
 
 var mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost/myvote')
 
 var ballotSchema = mongoose.Schema({
 
 	title			: {type : String, required: true},
 	entries 		: {type : Array, required: true},
-	recipientEmail 	: {type : Array},
+	emails			: {type : Array, required: true},
 
 });
 
@@ -41,4 +42,5 @@ var User = mongoose.model('User', userSchema);
 module.exports = {
 		Ballot: Ballot,
 		User  : User
+
 	};

@@ -1,42 +1,36 @@
-<!DOCTYPE html>
-<html ng-app="voteApp">
-	<head>
-		<title></title>
-     	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-     	<link rel="stylesheet" href="html/myvote.css">
-     	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js" type="text/javascript"></script>
-     	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-animate.js" type="text/javascript"></script>
-	</head>
 
-	<body ng-controller="mainController">
 
-	<div class="container-fluid">
-		<form ng-submit="ballotSubmit()">
+<div class="container-fluid">
+	
+	<form ng-submit="ballotSubmit()">
 
-		<div class="row">
-			<div>
-				<input class="col-md-3 col-md-offset-4" ng-model="newBallot.title" placeholder="Name of Ballot">
-			</div>
-			<div>
-				<input class="col-md-3 col-md-offset-4" ng-repeat="entry in newBallot.entries" ng-model="entry.name" placeholder="Name">
-				<div ng-style="{'width':'280px', 'height':'25px', 'margin-top':'10px', 'border':'solid 1px #A9A9A9', 'background-color':'#F8F8FF'}" class="col-md-3 col-md-offset-4" ng-click="addEntry()">New Entry</div>
-			</div>
-
-			<div class="padding">
-				<input class="col-md-3 col-md-offset-4" ng-repeat="entry in newEmail.entries" ng-model="entry.name" placeholder="email address">
-				<div ng-style="{'width':'280px', 'height':'25px', 'margin-top':'10px', 'border':'solid 1px #A9A9A9', 'background-color':'#F8F8FF'}" class="col-md-3 col-md-offset-4" ng-click="addEmail()">Enter new email Address</div>
-			</div>
+	<div class="row">
+	<div>
+	<h5 class="col-md-3 col-md-offset-4">Step 1, Create a Ballot.</h5>
+		<div>
+			<input class="col-md-3 col-md-offset-4" ng-model="newBallot.title" placeholder="Name of Ballot">
 		</div>
+		<div>
+			<input class="col-md-3 col-md-offset-4" ng-repeat="entry in newBallot.entries" ng-model="entry.name" placeholder="Name">
+			<div ng-style="{'width':'200px', 'height':'25px', 'margin-top':'10px', 'border':'solid 1px #A9A9A9', 'background-color':'#F8F8FF'}" class="col-md-3 col-md-offset-4" ng-click="addEntry()">New Entry</div>
+		</div>
+	</div>	
 
-			<input class="col-lg-1 col-md-offset-5" type="Submit">
+	<div>
+		<div class="padding">
+		<h5 class="col-md-3 col-md-offset-4">Step 2, Send Ballot link via </br/>email to recipients.</h5>
+			<input class="col-md-3 col-md-offset-4" ng-repeat="entry in newBallot.emails" ng-model="entry.email" placeholder="email address">
+			<div ng-style="{'width':'200px', 'height':'25px', 'margin-top':'10px', 'border':'solid 1px #A9A9A9', 'background-color':'#F8F8FF'}" class="col-md-3 col-md-offset-4" ng-click="addEmail()">Enter new email Address.</div>
 
+		</div>
+	</div>	
 
-		</form>
+	<div class="padding">
+		<h5 class="col-md-3 col-md-offset-4">Step 3, Submit Ballot and send emails to recipients.</h5>
+		<input class="col-lg-1 col-md-offset-5" type="Submit">
+	</div>
 	</div>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.js"></script>
-		<script src="html/main.js" type="text/javascript"></script>
-	</body>
-</html>
+	</form>
+	
+</div>

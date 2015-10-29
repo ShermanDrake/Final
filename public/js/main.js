@@ -1,20 +1,56 @@
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
-angular.module('voteApp', ['ngAnimate']);
+// $(document).ready(function(){
+//     $("#myBtn").click(function(){
+//         $("#myModal").modal();
+//     });
+// });
+angular.module('voteApp', ['ngAnimate', 'ngRoute']);
 angular.module('voteApp');
+
+
+angular.module('voteApp')
+	.config(['$routeProvider', function($routeProvider){
+		// No need to define #, it is assumed
+		$routeProvider
+			.when('/', {
+				templateUrl : '/html/myvote.html',
+				controller : 'mainController'
+			})
+			.when('/ballot', {
+				templateUrl : '/html/ballot.html',
+				controller : 'mainController'
+			})
+			.when('/error', {
+				templateUrl : 'html/error.html',
+				controller : 'mainController'
+			})
+			.otherwise({
+				redirectTo : '/error'
+			})
+
+	}])
+
+
 angular.module('voteApp').controller('mainController', ['$scope', '$http', function($scope, $http){
 
   $scope.ballot = false;
   $scope.newBallot = {};
+  $scope.newEmail = {};
   $scope.newBallot.entries = [{}]
-  // $scope.newEmail.entries = [{}]
+  $scope.newBallot.emails = [{}]
 
 
-  
+$("#myBtn").click(function(){
+    $("#myModal").modal();
+});
 
+
+$scope.isLoggedIn = function(){
+
+	$http.get('/auth/login')
+	.then(function(returnData){
+		console.log(returnData)
+	})
+}
 
 
 $scope.flip = function() {
@@ -41,12 +77,13 @@ $scope.addEntry = function(){
 
 }
 
-// $scope.addEmail = function(){
-// 	$scope.newEmail.entries.push({})
-// }
-
+$scope.addEmail = function(){
+	$scope.newBallot.emails.push({})
+}
 
 
 
 }])
+
+
 

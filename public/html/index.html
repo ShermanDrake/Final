@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="voteApp">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+     	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     	<link rel="stylesheet" href="css/myvote.css">
+     	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js" type="text/javascript"></script>
+     	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-animate.js" type="text/javascript"></script>
+     	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.js" type="text/javascript"></script>
+	</head>
+
+	<body ng-controller="mainController">
+
+
+
+	<div class="container-fluid">
+
+
+	<!-- Navbar -->
+
+		<div>
+			<nav class="navbar navbar-inverse">
+	  			<div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    		<div class="navbar-header">
+	     		 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	       	 		<span class="sr-only">Toggle navigation</span>
+	        		<span class="icon-bar"></span>
+	        		<span class="icon-bar"></span>
+	        		<span class="icon-bar"></span>
+	      			</button>
+	      			<a class="navbar-brand" href="/#/">myVote</a>
+	    		</div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      		<ul class="nav navbar-nav">
+	      		</ul>
+	      		<ul class="nav navbar-nav navbar-right">
+	        		<li><a href="javascript:void(0)">Link</a></li>
+	        		<li class="dropdown">
+	          			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create A Ballot <span class="caret"></span></a>
+	          		<ul class="dropdown-menu">
+	            	<li><a href="/#/ballot">New</a></li>
+	            	<li><a href="javascript:void(0)">View Createded Ballot</a></li>
+	<!--             	<li><a href="javascript:void(0)">Something else here</a></li>
+	            	<li role="separator" class="divider"></li>
+	            	<li><a href="javascript:void(0)">Separated link</a></li> -->
+	          		</ul>
+	        		</li>
+	      		</ul>
+	    		</div><!-- /.navbar-collapse -->
+	  			</div><!-- /.container-fluid -->
+			</nav>
+		</div>
+	
+
+
+
+	<div ng-view>
+	<!-- This is where our templates will be injected -->
+
+
+
+
+	</div>
+	</div>
+	<script src="js/main.js" type="text/javascript"></script>
+
+	</body>
+</html>
