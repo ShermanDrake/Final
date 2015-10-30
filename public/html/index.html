@@ -36,16 +36,30 @@
 	    		</div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
+
 	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      		<ul class="nav navbar-nav">
 	      		</ul>
 	      		<ul class="nav navbar-nav navbar-right">
-	        		<li><a href="javascript:void(0)">Link</a></li>
+	        		<li class="dropdown">
+	          			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">View Open Ballots <span class="caret"></span></a>
+	          		<ul class="dropdown-menu">
+
+	            	<li ng-repeat="ballot in ballots"><a ng-click="getBallot(ballot._id)" href="/#/openBallot/{{ballot._id}}">{{ballot.title}}</a></li>
+	            	</ul>
+	            	</li>
+	            </ul>	
+
+
+	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      		<ul class="nav navbar-nav">
+	      		</ul>
+	      		<ul class="nav navbar-nav navbar-right">
 	        		<li class="dropdown">
 	          			<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create A Ballot <span class="caret"></span></a>
 	          		<ul class="dropdown-menu">
 	            	<li><a href="/#/ballot">New</a></li>
-	            	<li><a href="javascript:void(0)">View Createded Ballot</a></li>
+<!-- 	            	<li><a href="javascript:void(0)">View Ballots</a></li> -->
 	<!--             	<li><a href="javascript:void(0)">Something else here</a></li>
 	            	<li role="separator" class="divider"></li>
 	            	<li><a href="javascript:void(0)">Separated link</a></li> -->

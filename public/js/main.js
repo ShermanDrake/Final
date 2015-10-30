@@ -19,6 +19,10 @@ angular.module('voteApp')
 				templateUrl : '/html/ballot.html',
 				controller : 'mainController'
 			})
+			.when('/openBallot/:id', {
+				templateUrl : '/html/openBallot.html',
+				controller  : 'mainController'
+			})
 			.when('/error', {
 				templateUrl : 'html/error.html',
 				controller : 'mainController'
@@ -30,13 +34,28 @@ angular.module('voteApp')
 	}])
 
 
-angular.module('voteApp').controller('mainController', ['$scope', '$http', function($scope, $http){
+angular.module('voteApp').controller('mainController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
 
   $scope.ballot = false;
   $scope.newBallot = {};
   $scope.newEmail = {};
-  $scope.newBallot.entries = [{}]
+  $scope.newBallot.entries = [{},{}]
   $scope.newBallot.emails = [{}]
+  $scope.newBallot.open = false;
+  $scope.ballots = {};
+
+
+
+if($routeParams.id){
+  	$http.get('/openBallot/' + $routeParams.id)
+  	.then(function(returnData){
+  		// console.log(returnData.data)
+  		$scope.ballot = returnData.data
+  		console.log($scope.ballot)
+
+  	})
+
+  }
 
 
 $("#myBtn").click(function(){
@@ -60,10 +79,13 @@ $scope.flip = function() {
 
 $http.get('/getballots')
 	.then(function(returnData){
-			$scope.ballot = returnData.data
+			$scope.ballots = returnData.data
+			// console.log(returnData)
 	})
 
 $scope.ballotSubmit = function(){
+	$scope.newBallot.open = !$scope.newBallot.open
+	console.log($scope.newBallot)
 	$http.post('/createBallot', $scope.newBallot)
 		.then(function(returnData){
 			console.log( returnData.data)
@@ -84,6 +106,8 @@ $scope.addEmail = function(){
 
 
 }])
+
+
 
 
 

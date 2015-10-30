@@ -6,11 +6,12 @@
 
 	<div class="row">
 	<div>
-	<h5 class="col-md-3 col-md-offset-4">Step 1, Create a Ballot.</h5>
+	<h5 class="col-md-3 col-md-offset-4">First, Create a Ballot.</h5>
 		<div>
 			<input class="col-md-3 col-md-offset-4" ng-model="newBallot.title" placeholder="Name of Ballot">
 		</div>
 		<div>
+<!-- 			<input class="col-md-3 col-md-offset-4" ng-model="entry.name" placeholder="Name"> -->
 			<input class="col-md-3 col-md-offset-4" ng-repeat="entry in newBallot.entries" ng-model="entry.name" placeholder="Name">
 			<div ng-style="{'width':'200px', 'height':'25px', 'margin-top':'10px', 'border':'solid 1px #A9A9A9', 'background-color':'#F8F8FF'}" class="col-md-3 col-md-offset-4" ng-click="addEntry()">New Entry</div>
 		</div>
@@ -18,15 +19,23 @@
 
 	<div>
 		<div class="padding">
-		<h5 class="col-md-3 col-md-offset-4">Step 2, Send Ballot link via </br/>email to recipients.</h5>
+
+		  <input ng-model="newBallot.open" type="checkbox">
+			<label class="col-md-3 col-md-offset-4">Check for a secure ballot, <u>email addresses required.</u>
+			</label>
+
+		<div ng-show="newBallot.open">	
+		<h5 class="col-md-3 col-md-offset-4">Next, Send Ballot link via </br/>email to recipients.</h5>
+
 			<input class="col-md-3 col-md-offset-4" ng-repeat="entry in newBallot.emails" ng-model="entry.email" placeholder="email address">
 			<div ng-style="{'width':'200px', 'height':'25px', 'margin-top':'10px', 'border':'solid 1px #A9A9A9', 'background-color':'#F8F8FF'}" class="col-md-3 col-md-offset-4" ng-click="addEmail()">Enter new email Address.</div>
+		</div>	
 
 		</div>
 	</div>	
 
 	<div class="padding">
-		<h5 class="col-md-3 col-md-offset-4">Step 3, Submit Ballot and send emails to recipients.</h5>
+		<h5 class="col-md-3 col-md-offset-4">Last, Submit Ballot (emails will be sent for secured ballots).</h5>
 		<input class="col-lg-1 col-md-offset-5" type="Submit">
 	</div>
 	</div>

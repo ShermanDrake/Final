@@ -18,39 +18,71 @@ module.exports = {
 	},
 
 	getBallots : function(req, res){
-		res.send(ballotModel.allBallots)
-
-	}
-
-}
-
-var createBallot = function(req, res){
-
-	var newBallot = newBallot({
-
-		name	: req.body.name,
-		entries	: req.body.entries.split(', '),
-		email	: req.body.email, 
-	})
-
-	newBallot.save( function(err, doc){
-		res.send(doc)
-
-		// Here is where you would want to send the email
-	})
-}
-var findBallots = function(req, res) {
-
-	console.log('REQ PARAMs', req.params)
-	if (req.params.ballotName){
-		Ballot.findOne({name : req.params.ballotName}, function(err, doc){
-				res.send(doc)
+		ballotModel.Ballot.find({
+		}, function(err, docs){
+			res.send(docs)	
 		})
-	}
-	else{
-		Ballot.find({}, function(err, docs){
+
+	}, 
+	getBallot: function(req, res) {
+		ballotModel.Ballot.findOne({_id:req.params.id}, function(err, docs){
+			console.log('docs  ', docs)
 			res.send(docs)
 		})
 	}
+
 }
+
+
+
+// var createBallot = function(req, res){
+
+// 	var newBallot = newBallot({
+
+// 		name	: req.body.name,
+// 		entries	: req.body.entries.split(', '),
+// 		email	: req.body.email, 
+// 	})
+
+// 	newBallot.save( function(err, doc){
+// 		res.send(doc)
+
+// 		// Here is where you would want to send the email
+// 	})
+// }
+
+// var findBallots = function(req, res) {
+
+// 	console.log('REQ PARAMs', req.params)
+// 	if (req.params.ballotName){
+// 		Ballot.findOne({name : req.params.ballotName}, function(err, doc){
+// 				res.send(doc)
+// 		})
+// 	}
+// 	else{
+// 		Ballot.find({}, function(err, docs){
+// 			res.send(docs)
+// 		})
+// 	}
+// }
+
+// var openBallots = function(req, res) {
+
+// 	var openBallots = openBallots({
+
+// 		name  :  req.body.name,
+// 	})
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -20,7 +20,8 @@ var ballotSchema = mongoose.Schema({
 
 	title			: {type : String, required: true},
 	entries 		: {type : Array, required: true},
-	emails			: {type : Array, required: true},
+	emails			: {type : Array},
+	open			: {type : Boolean, required: true},
 
 });
 

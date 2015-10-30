@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var bodyParser = require('body-parser');
+var mainController = require('./controllers/voteCtrl.js');
 
 mongoose.connect('mongodb://localhost/myvote');
 
@@ -31,6 +32,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
+
+app.get('/getBallots', mainController.getBallots);
+
+app.get('/openBallot/:id', mainController.getBallot);
+
+
 // Routes \\
 var authenticationController = require('./controllers/authentication');
 
@@ -50,14 +57,14 @@ app.get('/auth/logout', authenticationController.logout);
 
 // This route is designed to send back the logged in user (or undefined if they are NOT logged in)
 app.get('/api/me', function(req, res){
-	res.send(req.user)
+	res.send(req.user)	
 })
 
 // ***** IMPORTANT ***** //
 // By including this middleware (defined in our config/passport.js module.exports),
 // We can prevent unauthorized access to any route handler defined after this call
 // to .use()
-app.use(passportConfig.ensureAuthenticated);
+// app.use(passportConfig.ensureAuthenticated);
 
 
 app.get('/',function(req, res) {
@@ -71,7 +78,7 @@ app.get('/',function(req, res) {
 // });
 
 app.post('/createBallot', mainController.createBallot)
-app.get('/getballots', mainController.getBallots)
+app.get('/getBallots', mainController.getBallots)
 
 
 
