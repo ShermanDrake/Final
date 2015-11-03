@@ -29,6 +29,28 @@ module.exports = {
 			console.log('docs  ', docs)
 			res.send(docs)
 		})
+	},
+
+	submitVote: function(req, res) {
+		// ballotModel.Vote.save
+		var vote = new ballotModel.Vote(req.body)
+		vote.save(function(err, doc){
+			if(err) {
+				console.log(err)
+			}
+			console.log(doc)
+			res.redirect('/#/results')
+		})
+
+	},
+	getVotes: function(req, res) {
+		// find all the votes that belong to a ballot
+		ballotModel.Vote.find({
+			ballot : req.params.ballotId
+		}, function(err, docs){
+			res.send(docs)
+		})
+
 	}
 
 }

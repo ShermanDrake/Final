@@ -22,6 +22,7 @@ var ballotSchema = mongoose.Schema({
 	entries 		: {type : Array, required: true},
 	emails			: {type : Array},
 	open			: {type : Boolean, required: true},
+	selections		: {type: Array},
 
 });
 
@@ -37,11 +38,21 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
+var voteSchema = mongoose.Schema({
 
+	ballot      : {type	: String, required: true}, 
+	vote		: {type : String, required: true},
+	user        : {type : String}
+});
+
+var Vote = mongoose.model('Vote', voteSchema);
+
+	
 
 
 module.exports = {
 		Ballot: Ballot,
-		User  : User
+		User  : User,
+		Vote  : Vote
 
 	};

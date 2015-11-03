@@ -3,7 +3,7 @@
 //         $("#myModal").modal();
 //     });
 // });
-angular.module('voteApp', ['ngAnimate', 'ngRoute']);
+angular.module('voteApp', ['ngAnimate', 'ngRoute', 'chart.js']);
 angular.module('voteApp');
 
 
@@ -23,6 +23,10 @@ angular.module('voteApp')
 				templateUrl : '/html/openBallot.html',
 				controller  : 'mainController'
 			})
+			.when('/results/:id', {
+				templateUrl : '/html/results.html',
+				controller : 'mainController'
+			})
 			.when('/error', {
 				templateUrl : 'html/error.html',
 				controller : 'mainController'
@@ -34,7 +38,8 @@ angular.module('voteApp')
 	}])
 
 
-angular.module('voteApp').controller('mainController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
+angular.module('voteApp')
+.controller('mainController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams){
 
   $scope.ballot = false;
   $scope.newBallot = {};
@@ -43,16 +48,40 @@ angular.module('voteApp').controller('mainController', ['$scope', '$http', '$rou
   $scope.newBallot.emails = [{}]
   $scope.newBallot.open = false;
   $scope.ballots = {};
+  $scope.vote = ''
+  $scope.voteList = []
 
+
+
+  $scope.submitVote = function(){
+  	var ballotInfo = {vote : $scope.vote, ballot : $routeParams.id}
+  	console.log(ballotInfo)
+  	$http.post('/submitVote', ballotInfo)
+
+		.then(function(returnData){
+			console.log( returnData.data)
+			window.location.href = '/#/results/' + $routeParams.id
+			$scope.ballots = returnData.data
+
+  	})
+
+
+  }
 
 
 if($routeParams.id){
   	$http.get('/openBallot/' + $routeParams.id)
   	.then(function(returnData){
-  		// console.log(returnData.data)
+  		console.log(returnData.data)
   		$scope.ballot = returnData.data
-  		console.log($scope.ballot)
+  		// console.log($scope.ballot)	
 
+  	})
+
+  	$http.get('/getVotes/' + $routeParams.id)
+  	.then(function(returnData){
+  		$scope.voteList = returnData.data
+  		//use vote list to generate the charts.
   	})
 
   }
@@ -103,6 +132,10 @@ $scope.addEmail = function(){
 	$scope.newBallot.emails.push({})
 }
 
+
+//data for chartJs and the Slider
+    $scope.labels = ["{{entry.name}}", "{{entry.name}}", "Red"];
+    $scope.data = ['voteCount',100,100]
 
 
 }])

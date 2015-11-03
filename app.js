@@ -37,6 +37,12 @@ app.get('/getBallots', mainController.getBallots);
 
 app.get('/openBallot/:id', mainController.getBallot);
 
+//post route for submitting votes\\
+app.post('/submitVote', mainController.submitVote);
+
+//route for getting votes.
+app.get('/getVotes/:ballotId', mainController.getVotes);
+
 
 // Routes \\
 var authenticationController = require('./controllers/authentication');
