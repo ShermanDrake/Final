@@ -3,6 +3,7 @@ var ballotModel = require('../models/votes.js');
 //function that calculates all the possible vote options.
 var voteOptions = function(object){
 var options = [];
+object = object || {}
 object.entries.forEach(function(element){
 	options.push(element.name)
 })
@@ -11,6 +12,8 @@ return options
 
 var voteSort = function(votes, selections){
 var results = [];
+selections = selections || []
+votes = votes || []
 selections.forEach(function(selection){
 	var result = votes.filter(function(vote){
 		return vote.vote === selection;
@@ -23,7 +26,10 @@ return results
 }
 var count = function(array){
 	var finalCount = []
+	array = array || []
+if( array !== []){	
 	array.forEach(function(results){
+
 console.log('results  ', results[0]['vote'])
 console.log('count  ', results['length'])
 var vote = results[0]['vote'];
@@ -32,7 +38,9 @@ var countObject = {}
 countObject[vote] = count
 finalCount.push(countObject);
 
+
 	})
+}
 	return finalCount
 }
 
