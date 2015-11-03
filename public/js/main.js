@@ -50,6 +50,8 @@ angular.module('voteApp')
   $scope.ballots = {};
   $scope.vote = ''
   $scope.voteList = []
+  $scope.labels = []
+
 
 
 
@@ -80,8 +82,18 @@ if($routeParams.id){
 
   	$http.get('/getVotes/' + $routeParams.id)
   	.then(function(returnData){
-  		$scope.voteList = returnData.data
-  		//use vote list to generate the charts.
+  		$scope.voteCount = returnData.data
+  		console.log($scope.voteCount)
+  		$scope.labels = []
+  		$scope.data = []
+  		returnData.data.forEach(function(object){
+  			for(var key in object){
+  				$scope.labels.push(key)
+  				$scope.data.push(object[key])
+  			}
+
+  		})
+
   	})
 
   }
@@ -133,9 +145,6 @@ $scope.addEmail = function(){
 }
 
 
-//data for chartJs and the Slider
-    $scope.labels = ["{{entry.name}}", "{{entry.name}}", "Red"];
-    $scope.data = ['voteCount',100,100]
 
 
 }])

@@ -1,5 +1,46 @@
 var ballotModel = require('../models/votes.js');
 
+//function that calculates all the possible vote options.
+var voteOptions = function(object){
+var options = [];
+object.entries.forEach(function(element){
+	options.push(element.name)
+})
+return options
+}
+
+var voteSort = function(votes, selections){
+var results = [];
+selections.forEach(function(selection){
+	var result = votes.filter(function(vote){
+		return vote.vote === selection;
+
+	})
+	results.push(result)
+
+})
+return results
+}
+var count = function(array){
+	var finalCount = []
+	array.forEach(function(results){
+console.log('results  ', results[0]['vote'])
+console.log('count  ', results['length'])
+var vote = results[0]['vote'];
+var count = results['length'];
+var countObject = {}
+countObject[vote] = count
+finalCount.push(countObject);
+
+	})
+	return finalCount
+}
+
+
+
+
+
+
 module.exports = {
 
 	createBallot : function(req, res){
@@ -48,7 +89,17 @@ module.exports = {
 		ballotModel.Vote.find({
 			ballot : req.params.ballotId
 		}, function(err, docs){
-			res.send(docs)
+			ballotModel.Ballot.find({
+				_id:req.params.ballotId
+			},function(err, ballot){
+				var options = voteOptions(ballot[0])
+				var votes = voteSort(docs, options)
+				var finalCount = count(votes)
+			res.send(finalCount)
+
+
+			})
+
 		})
 
 	}
