@@ -27,17 +27,18 @@ return results
 var count = function(array){
 	var finalCount = []
 	array = array || []
-if( array !== []){	
+if( array.length ){	
 	array.forEach(function(results){
 
-console.log('results  ', results[0]['vote'])
-console.log('count  ', results['length'])
-var vote = results[0]['vote'];
-var count = results['length'];
-var countObject = {}
-countObject[vote] = count
-finalCount.push(countObject);
-
+		if (results && results.length){
+			console.log('results  ', results)
+			// console.log('count  ', results['length'])
+			var vote = results[0]['vote'];
+			var count = results['length'];
+			var countObject = {}
+			countObject[vote] = count
+			finalCount.push(countObject);
+		}
 
 	})
 }
